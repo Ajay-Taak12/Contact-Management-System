@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        .login-container a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/api/users/login" method="POST">
+            <input type="text" id="email" name="email" placeholder="Enter your username or email" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>
+            Don't have an account? <a href="/api/users/register">Register here</a>
+        </p>
+    </div>
+
+    <!-- <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get form values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Create the payload
+            const payload = { email, password };
+
+            try {
+                // Send POST request to the backend
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                // Handle the response
+                if (response.ok) {
+                    alert('Registration successful!');
+                    window.location.href = '/api/users/login'; // Redirect to login page
+                } else {
+                    const error = await response.json();
+                    alert(`Registration failed: ${error.message}`);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('An error occurred while registering.');
+            }
+        });
+    </script> -->
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Management System</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  /* Form Section */
+  .form-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Contact List Section */
+  .list-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    background-color: #f1f1f1;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  li button {
+    margin-left: 10px;
+    background-color: #dc3545;
+  }
+  
+  li button.edit {
+    background-color: #28a745;
+  }
+  
+  li button:hover {
+    opacity: 0.8;
+  }
+  
+  </style>
+</head>
+<body>
+  <h1>Contact Management System</h1>
+
+  <div class="form-container">
+    <h2>Add / Edit Contact</h2>
+    <form id="contactForm">
+      <input type="hidden" id="contactId">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <button type="submit">Save Contact</button>
+    </form>
+  </div>
+
+  <div class="list-container">
+    <h2>Contact List</h2>
+    <ul id="contactList"></ul>
+  </div>
+
+  <script>
+    const apiUrl = "http://localhost:5000/api/contacts"; // Update with your backend API URL
+
+// Select DOM elements
+const contactForm = document.getElementById("contactForm");
+const contactList = document.getElementById("contactList");
+const contactIdInput = document.getElementById("contactId");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
+
+// Fetch and display contacts
+async function fetchContacts() {
+  try {
+    const response = await fetch(apiUrl);
+    const contacts = await response.json();
+    displayContacts(contacts);
+  } catch (error) {
+    console.error("Error fetching contacts:", error);
+  }
+}
+
+// Display contacts in the list
+function displayContacts(contacts) {
+  contactList.innerHTML = "";
+  contacts.forEach(contact => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${contact.name} - ${contact.email} - ${contact.phone}
+      <button class="edit" onclick="editContact(${contact.id}, '${contact.name}', '${contact.email}', '${contact.phone}')">Edit</button>
+      <button onclick="deleteContact(${contact.id})">Delete</button>
+    `;
+    contactList.appendChild(li);
+  });
+}
+
+// Add or update a contact
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = contactIdInput.value;
+  const contactData = {
+    name: nameInput.value,
+    email: emailInput.value,
+    phone: phoneInput.value,
+  };
+
+  try {
+    if (id) {
+      // Update contact
+      await fetch(`${apiUrl}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData),
+      });
+    } else {
+      // Add contact
+      await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData),
+      });
+    }
+    contactForm.reset();
+    fetchContacts();
+  } catch (error) {
+    console.error("Error saving contact:", error);
+  }
+});
+
+// Edit contact
+function editContact(id, name, email, phone) {
+  contactIdInput.value = id;
+  nameInput.value = name;
+  emailInput.value = email;
+  phoneInput.value = phone;
+}
+
+// Delete contact
+async function deleteContact(id) {
+  try {
+    await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
+    fetchContacts();
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+  }
+}
+
+// Initialize
+fetchContacts();
+
+  </script>
+</body>
+</html> -->
